@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+
+    /* Cores primárias */
+  --cor-principal: #1e90ff;
+  --cor-secundaria: #ff6347;
+
+  /* Neutros */
+  --cor-fundo: #f5f5f5;
+  --cor-fundo-secundaria: #001d56;
+  --cor-texto: #333333;
+  --cor-link-menu: #ddd;
+
+  /* Cores de destaque */
+  --cor-sucesso: #28a745;
+  --cor-erro: #dc3545;
+  --cor-alerta: #ffc107;
+
+}
+h2{
+    margin-bottom: 1.2rem;
+}

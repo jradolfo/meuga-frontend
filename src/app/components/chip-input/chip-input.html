@@ -1,0 +1,34 @@
+<div class="form-floating chip-input mb-3" [class.disabled]="disabled" (click)="focusInput()">
+      
+  <label for="floatingInput">Tags</label>
+    
+  @if (chips.length) {
+    <div class="chips">
+        @for (c of chips; track c; let i = $index) {
+            <span class="chip">
+                <span class="chip-label">{{ c }}</span>
+                @if (removable && !disabled) {
+                    <button
+                        type="button"
+                        class="chip-remove"
+                        (click)="remove(i)"
+                        aria-label="Remover {{ c }}"
+                    >
+                        ×
+                    </button>
+                }
+            </span>
+        }
+    </div>
+    }
+
+  <input
+    #input
+    class="chip-input-field floatingInput"
+    [attr.placeholder]="chips.length ? '' : placeholder"
+    [disabled]="disabled"
+    (keydown)="onKeydown($event)"
+    (blur)="onTouched()"
+    autocomplete="off" />
+  
+</div>

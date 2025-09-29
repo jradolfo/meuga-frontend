@@ -1,0 +1,17 @@
+.meses .btn-secondary {
+  border: none;
+  background-color: transparent;
+  color: #555;
+  border-bottom: 1px solid rgb(33, 37, 41);
+  border-radius: 0px;
+}
+
+.meses .btn-secondary.active {
+  border-bottom: 6px solid #3949ab !important;
+  font-weight: bold;
+  color: black;
+}
+
+.meses .btn-secondary:hover {
+  border-bottom: 6px solid #3949ab !important;
+}

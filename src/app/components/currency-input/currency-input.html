@@ -1,0 +1,28 @@
+<div class="currency-input form-floating mb-3" [class.focused]="focused">
+    <div class="form-floating">
+        <select id="cmbMoeda" class="prefix form-select" [value]="selectedCurrency" (change)="onCurrencyChange($event)" aria-label="Moeda selecionada">
+            <option value="BRL">R$</option>
+            <option value="EUR">€</option>
+            <option value="USD">$</option>
+        </select>
+        <label for="cmbMoeda">Moeda</label>
+    </div>
+ 
+  <div class="input form-floating">
+    <input
+        #input
+        class="form-control"
+        type="text"
+        inputmode="decimal"
+        [placeholder]="placeholder"
+        [disabled]="disabled"
+        (input)="onInput($event)"
+        (blur)="onBlur()"
+        (focus)="onFocus()"
+        autocomplete="off"
+    />
+    <label for="txtValor">Valor</label>
+  </div>
+
+
+</div>

@@ -1,0 +1,19 @@
+main{
+    width: 83vw;
+    height: 100vh;
+    padding: 1rem 1.5rem;
+    float: right;
+    background-color: var(--cor-fundo);  
+}
+nav{
+    width: 17vw;
+    height: 100vh;
+    float: left;
+    background-color: var(--cor-fundo-secundaria);
+    color: var(--menu-text-color);
+    display: flex;
+    flex-direction: column;
+}
+section{
+    padding: 10px;
+}

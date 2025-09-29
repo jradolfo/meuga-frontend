@@ -1,0 +1,13 @@
+.currency-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.currency-input .prefix {
+  min-width: 100px;
+}
+
+.currency-input .input {
+  flex: 1;
+}

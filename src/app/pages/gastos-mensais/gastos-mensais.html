@@ -1,0 +1,107 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+	<h2>Gastos Mensais</h2>
+	<button class="btn btn-primary mb-3" (click)="open(content)"><i class="fa-solid fa-plus"></i></button>
+</div>
+
+<div class="meses btn-group d-flex align-items-center mb-3" style="margin-bottom: 2rem;">
+  <a href="#" class="btn btn-secondary">Janeiro</a>
+  <a href="#" class="btn btn-secondary">Fevereiro</a>
+  <a href="#" class="btn btn-secondary">Março</a>
+  <a href="#" class="btn btn-secondary">Abril</a>
+  <a href="#" class="btn btn-secondary">Maio</a>
+  <a href="#" class="btn btn-secondary">Junho</a>
+  <a href="#" class="btn btn-secondary">Julho</a>
+  <a href="#" class="btn btn-secondary">Agosto</a>
+  <a href="#" class="btn btn-secondary active" aria-current="page">Setembro</a>
+  <a href="#" class="btn btn-secondary">Outubro</a>
+  <a href="#" class="btn btn-secondary">Novembro</a>
+  <a href="#" class="btn btn-secondary">Dezembro</a>
+</div>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">Nome</th>
+            <th scope="col">Categoria</th>
+			<th scope="col">Tags</th>
+			<th scope="col">Grupo</th>
+            <th scope="col">Recorrência</th>
+			<th scope="col">Parcelas</th>
+			<th scope="col" class="text-end">Valor</th>
+		</tr>
+	</thead>
+	<tbody>
+		@for (gasto of gastos; track gasto.id; let i = $index) {
+			<tr>
+				<td>{{ gasto.nome }}</td>
+                <td>{{ gasto.categoria.nome }}</td>
+				<td>{{ gasto.tags.join(', ') }}</td>
+				<td>{{ gasto.grupo?.nome ?? '--' }}</td>
+                <td>{{ gasto.tipoRecorrencia ?? '--'  }}</td>
+				<td>{{ formatarParcelas(gasto) }}</td>
+				<td class="text-end">{{ gasto.valor | currency }}</td>
+			</tr>
+		}
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="6" class="text-end"><strong>Total:</strong></td>
+			<td class="text-end"><strong>{{ totalGastos | currency }}</strong></td>
+		</tr>
+	</tfoot>
+</table>
+
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Novo Gasto</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<form>
+			<div class="mb-4">			
+
+				<div class="form-floating mb-3">
+					<input type="text" class="form-control" id="txtNome" placeholder="nome do gasto">
+					<label for="txtNome">Nome</label>
+				</div>
+
+				<div class="form-floating mb-3">
+					<select class="form-select" id="cmbCategoria" aria-label="Floating label select example">
+						<option selected>Selecione uma categoria</option>
+						<option value="1">Alimentação</option>
+						<option value="2">Transporte</option>
+						<option value="3">Lazer</option>
+					</select>
+					<label for="cmbCategoria">Categoria</label>
+				</div>
+
+				<app-chip-input formControlName="tags" placeholder="Adicione tags" [maxChips]="5"></app-chip-input>
+
+				<div class="form-floating mb-3">
+					<select class="form-select" id="cmbGrupo" aria-label="Floating label select example">
+						<option selected>Selecione um grupo</option>
+						<option value="1">Viagem Lyon</option>
+						<option value="2">Dodo & Terra</option>
+						<option value="3">Viagem Japão</option>
+					</select>
+					<label for="cmbGrupo">Grupo</label>
+				</div>
+
+				<app-currency-input formControlName="valor" placeholder="Valor do gasto"></app-currency-input>
+
+				<div class="form-floating mb-3">
+					<div class="form-check form-switch">
+						<input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+					</div>
+					<label for="switchCheckDefault">Parcelado</label>
+				</div>
+
+				<app-switch-input></app-switch-input>	
+
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-secondary" (click)="modal.close('Save click')">Save</button>
+	</div>
+</ng-template>

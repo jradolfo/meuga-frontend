@@ -1,0 +1,58 @@
+<h2>Usuários</h2>
+
+<div class="usuarios-form">
+  <form (ngSubmit)="salvarUsuario()">
+    
+    @if (usuarioSelecionado) {
+        <div>
+            <label>Nome:</label>
+            <input [(ngModel)]="usuarioSelecionado.nome" name="nome" required />
+            <label>Email:</label>
+            <input [(ngModel)]="usuarioSelecionado.email" name="email" required />
+            <label>Avatar (URL):</label>
+            <input [(ngModel)]="usuarioSelecionado.avatar" name="avatar" required />
+            <label>Senha:</label>
+            <input [(ngModel)]="usuarioSelecionado.senha" name="senha" type="password" required />
+            <button type="submit">Salvar</button>
+            <button type="button" (click)="cancelarEdicao()">Cancelar</button>
+        </div>
+    } @else {
+        <div>
+            <label>Nome:</label>
+            <input [(ngModel)]="novoUsuario.nome" name="novoNome" required />
+            <label>Email:</label>
+            <input [(ngModel)]="novoUsuario.email" name="novoEmail" required />
+            <label>Avatar (URL):</label>
+            <input [(ngModel)]="novoUsuario.avatar" name="novoAvatar" required />
+            <label>Senha:</label>
+            <input [(ngModel)]="novoUsuario.senha" name="novoSenha" type="password" required />
+            <button type="submit">Adicionar</button>
+        </div>
+    }
+  </form>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nome</th>
+      <th>Email</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (usuario of usuarios; track usuario.id; let i = $index) {
+        <tr>
+            <td>{{ usuario.id }}</td>
+            <td>{{ usuario.nome }}</td>
+            <td>{{ usuario.email }}</td>
+            <td><img [src]="usuario.avatar" alt="avatar" width="32" height="32" /></td>
+            <td>
+                <button (click)="editarUsuario(usuario)">Editar</button>
+                <button (click)="excluirUsuario(usuario)">Excluir</button>
+            </td>
+        </tr>
+    }
+  </tbody>
+</table>
