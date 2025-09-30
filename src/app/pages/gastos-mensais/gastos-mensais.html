@@ -25,6 +25,7 @@
             <th scope="col">Categoria</th>
 			<th scope="col">Tags</th>
 			<th scope="col">Grupo</th>
+			<th scope="col">Criado por</th>
             <th scope="col">Recorrência</th>
 			<th scope="col">Parcelas</th>
 			<th scope="col" class="text-end">Valor</th>
@@ -37,6 +38,7 @@
                 <td>{{ gasto.categoria.nome }}</td>
 				<td>{{ gasto.tags.join(', ') }}</td>
 				<td>{{ gasto.grupo?.nome ?? '--' }}</td>
+				<td>{{ gasto.usuarioCriador.nome }}</td>
                 <td>{{ gasto.tipoRecorrencia ?? '--'  }}</td>
 				<td>{{ formatarParcelas(gasto) }}</td>
 				<td class="text-end">{{ gasto.valor | currency }}</td>
@@ -45,7 +47,7 @@
 	</tbody>
 	<tfoot>
 		<tr>
-			<td colspan="6" class="text-end"><strong>Total:</strong></td>
+			<td colspan="7" class="text-end"><strong>Total:</strong></td>
 			<td class="text-end"><strong>{{ totalGastos | currency }}</strong></td>
 		</tr>
 	</tfoot>
@@ -53,12 +55,21 @@
 
 <ng-template #content let-modal>
 	<div class="modal-header">
-		<h4 class="modal-title" id="modal-basic-title">Novo Gasto</h4>
-		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+		<h4 class="modal-title" id="modal-basic-title">Novo Gasto</h4>		
 	</div>
 	<div class="modal-body">
 		<form>
 			<div class="mb-4">			
+
+				<div class="form-floating mb-3">
+					<select class="form-select" id="cmbGrupo" aria-label="Floating label select example">
+						<option selected>Sem Grupo</option>
+						<option value="1">Viagem Lyon</option>
+						<option value="2">Dodo & Terra</option>
+						<option value="3">Viagem Japão</option>
+					</select>
+					<label for="cmbGrupo">Grupo</label>
+				</div>
 
 				<div class="form-floating mb-3">
 					<input type="text" class="form-control" id="txtNome" placeholder="nome do gasto">
@@ -77,31 +88,39 @@
 
 				<app-chip-input formControlName="tags" placeholder="Adicione tags" [maxChips]="5"></app-chip-input>
 
-				<div class="form-floating mb-3">
-					<select class="form-select" id="cmbGrupo" aria-label="Floating label select example">
-						<option selected>Selecione um grupo</option>
-						<option value="1">Viagem Lyon</option>
-						<option value="2">Dodo & Terra</option>
-						<option value="3">Viagem Japão</option>
-					</select>
-					<label for="cmbGrupo">Grupo</label>
-				</div>
+	
 
 				<app-currency-input formControlName="valor" placeholder="Valor do gasto"></app-currency-input>
 
-				<div class="form-floating mb-3">
-					<div class="form-check form-switch">
-						<input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+				<div style="display: flex; flex-direction: row; gap: 8px; align-items: center;">
+					<app-switch-input [(switchState)]="parcelado"></app-switch-input>	
+
+					<div class="form-floating mb-3">
+						<input type="number" class="form-control" id="txtParcelas">
+						<label for="txtParcelas">Parcelas</label>
 					</div>
-					<label for="switchCheckDefault">Parcelado</label>
+
+					<div style="min-width: 170px; padding: 0 0 12px;">
+						<label>Valor da Parcela</label>
+						<div>R$ 123,00</div>
+					</div>
 				</div>
 
-				<app-switch-input></app-switch-input>	
+				<div class="form-floating mb-3">
+					<select class="form-select" id="cmbRecorrencia" aria-label="Floating label select example">
+						<option selected>Sem Recorrência</option>
+						<option value="1">Mensal</option>
+						<option value="2">Anual</option>						
+					</select>
+					<label for="cmbRecorrencia">Recorrência</label>
+				</div>
+
 
 			</div>
 		</form>
 	</div>
 	<div class="modal-footer">
-		<button type="button" class="btn btn-outline-secondary" (click)="modal.close('Save click')">Save</button>
+		<button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('Cross click')">Desistir</button>
+		<button type="button" class="btn btn-outline-primary" (click)="modal.close('Save click')">Inlcuir</button>
 	</div>
 </ng-template>

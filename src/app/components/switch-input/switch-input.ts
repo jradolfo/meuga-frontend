@@ -1,34 +1,19 @@
-import { Component, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, forwardRef, model } from '@angular/core';
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: 'app-switch-input',
-  imports: [],
+  imports: [FormsModule],
   standalone: true,
   templateUrl: './switch-input.html',
-  styleUrl: './switch-input.css',
-   providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => SwitchInput),
-      multi: true,
-    },
-  ],
+  styleUrl: './switch-input.css',  
 })
-export class SwitchInput implements ControlValueAccessor  {
+export class SwitchInput  {
 
-  writeValue(obj: any): void {
-    throw new Error('Method not implemented.');
+  switchState = model(false);
+  
+  toggleTheme() {
+    this.switchState.update(current => !current);
   }
-  registerOnChange(fn: any): void {
-    throw new Error('Method not implemented.');
-  }
-  registerOnTouched(fn: any): void {
-    throw new Error('Method not implemented.');
-  }
-  setDisabledState?(isDisabled: boolean): void {
-    throw new Error('Method not implemented.');
-  }
-
 
 }

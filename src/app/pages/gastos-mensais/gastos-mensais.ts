@@ -7,15 +7,6 @@ import { ChipInput } from "../../components/chip-input/chip-input";
 import { CurrencyInput } from "../../components/currency-input/currency-input";
 import { SwitchInput } from "../../components/switch-input/switch-input";
 import { NovoGasto } from '../../models/novo_gasto';
-import { 
-  form, 
-  required, 
-  minLength, 
-  validate, 
-  submit,
-  Control,
-} from '@angular/forms/signals';
-
 
 @Component({
   selector: 'app-gastos-mensais',
@@ -30,15 +21,7 @@ export class GastosMensais {
   private modalService = inject(NgbModal);
 	closeResult: WritableSignal<string> = signal('');
 
-  protected readonly novoGasto = signal<NovoGasto>({
-    nome: '',
-    valor: 0,
-    categoria: undefined,
-    tags: [],
-    moeda: undefined
-  });
-
-  protected readonly talkProposalForm = form(this.novoGasto);
+  parcelado: boolean = true;
 
   constructor(private gastoService: GastoService) {}
 
