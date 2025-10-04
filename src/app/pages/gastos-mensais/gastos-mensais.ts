@@ -31,7 +31,7 @@ export class GastosMensais {
   }
   
 	open(content: TemplateRef<any>) {
-		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+		this.modalService.open(content, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then(
 			(result) => {
 				this.closeResult.set(`Closed with: ${result}`);
 			},

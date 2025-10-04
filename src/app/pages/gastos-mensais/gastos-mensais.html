@@ -61,29 +61,29 @@
 		<form>
 			<div class="mb-4">			
 
-				<div class="form-floating mb-3">
+				<div class="mb-3">
+					<label class="form-label" for="cmbGrupo">Grupo</label>
 					<select class="form-select" id="cmbGrupo" aria-label="Floating label select example">
 						<option selected>Sem Grupo</option>
 						<option value="1">Viagem Lyon</option>
 						<option value="2">Dodo & Terra</option>
 						<option value="3">Viagem Japão</option>
 					</select>
-					<label for="cmbGrupo">Grupo</label>
 				</div>
 
-				<div class="form-floating mb-3">
-					<input type="text" class="form-control" id="txtNome" placeholder="nome do gasto">
-					<label for="txtNome">Nome</label>
+				<div class="mb-3">
+					<label class="form-label" for="txtNome">Nome</label>
+					<input type="text" class="form-control" id="txtNome" >
 				</div>
 
-				<div class="form-floating mb-3">
+				<div class="mb-3">
+					<label class="form-label" for="cmbCategoria">Categoria</label>
 					<select class="form-select" id="cmbCategoria" aria-label="Floating label select example">
 						<option selected>Selecione uma categoria</option>
 						<option value="1">Alimentação</option>
 						<option value="2">Transporte</option>
 						<option value="3">Lazer</option>
 					</select>
-					<label for="cmbCategoria">Categoria</label>
 				</div>
 
 				<app-chip-input formControlName="tags" placeholder="Adicione tags" [maxChips]="5"></app-chip-input>
@@ -93,26 +93,28 @@
 				<app-currency-input formControlName="valor" placeholder="Valor do gasto"></app-currency-input>
 
 				<div style="display: flex; flex-direction: row; gap: 8px; align-items: center;">
-					<app-switch-input [(switchState)]="parcelado"></app-switch-input>	
+					<div class="mb-3">
+						<app-switch-input [(switchState)]="parcelado"></app-switch-input>	
+					</div>
 
-					<div class="form-floating mb-3">
+					<div class="mb-3">
+						<label class="form-label" for="txtParcelas">Parcelas</label>
 						<input type="number" class="form-control" id="txtParcelas">
-						<label for="txtParcelas">Parcelas</label>
 					</div>
 
 					<div style="min-width: 170px; padding: 0 0 12px;">
-						<label>Valor da Parcela</label>
+						<label class="form-label">Valor da Parcela</label>
 						<div>R$ 123,00</div>
 					</div>
 				</div>
 
-				<div class="form-floating mb-3">
+				<div class="mb-3">
+					<label class="form-label" for="cmbRecorrencia">Recorrência</label>
 					<select class="form-select" id="cmbRecorrencia" aria-label="Floating label select example">
 						<option selected>Sem Recorrência</option>
 						<option value="1">Mensal</option>
 						<option value="2">Anual</option>						
 					</select>
-					<label for="cmbRecorrencia">Recorrência</label>
 				</div>
 
 
