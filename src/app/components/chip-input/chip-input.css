@@ -59,7 +59,7 @@
   margin-left: 5px;
 }
 
-.form-floating:focus-within {
+.form-select:focus-within {
 color: var(--bs-body-color);
   background-color: var(--bs-body-bg);
   border-color: #86b7fe;

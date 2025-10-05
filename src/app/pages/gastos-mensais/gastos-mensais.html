@@ -54,11 +54,12 @@
 </table>
 
 <ng-template #content let-modal>
-	<div class="modal-header">
-		<h4 class="modal-title" id="modal-basic-title">Novo Gasto</h4>		
-	</div>
-	<div class="modal-body">
-		<form>
+	<form [formGroup]="gastoForm" (ngSubmit)="onSubmit(modal)">
+		<div class="modal-header">
+			<h4 class="modal-title" id="modal-basic-title">Novo Gasto</h4>		
+		</div>
+		<div class="modal-body">
+		
 			<div class="mb-4">			
 
 				<div class="mb-3">
@@ -86,43 +87,56 @@
 					</select>
 				</div>
 
-				<app-chip-input formControlName="tags" placeholder="Adicione tags" [maxChips]="5"></app-chip-input>
-
-	
-
-				<app-currency-input formControlName="valor" placeholder="Valor do gasto"></app-currency-input>
-
-				<div style="display: flex; flex-direction: row; gap: 8px; align-items: center;">
-					<div class="mb-3">
-						<app-switch-input [(switchState)]="parcelado"></app-switch-input>	
-					</div>
-
-					<div class="mb-3">
-						<label class="form-label" for="txtParcelas">Parcelas</label>
-						<input type="number" class="form-control" id="txtParcelas">
-					</div>
-
-					<div style="min-width: 170px; padding: 0 0 12px;">
-						<label class="form-label">Valor da Parcela</label>
-						<div>R$ 123,00</div>
-					</div>
-				</div>
-
 				<div class="mb-3">
-					<label class="form-label" for="cmbRecorrencia">Recorrência</label>
-					<select class="form-select" id="cmbRecorrencia" aria-label="Floating label select example">
-						<option selected>Sem Recorrência</option>
-						<option value="1">Mensal</option>
-						<option value="2">Anual</option>						
-					</select>
+					<app-chip-input formControlName="tags" placeholder="Adicione tags" [maxChips]="5" />
+				</div>
+		
+				<div class="mb-3">
+					<app-moeda-valor [(valor)]="valor" [(moeda)]="moeda" />
 				</div>
 
+				<div class="mb-3" style="display: flex; flex-direction: row; gap: 1rem;">
+					<div class="parcelado-recorrente" >
+						<label class="form-label" for="cmbRecorrencia">Parcelada / Recorrente</label>
+						<select class="form-select" id="cmbRecorrencia" aria-label="Floating label select example" [value]="parceladoRecorrente()" (change)="parceladoRecorrente.set($any($event.target).value)" >
+							<option value="nao_aplica">N/A</option>
+							<option value="parcelado">Parcelado</option>
+							<option value="recorrente">Recorrente</option>						
+						</select>
+					</div>
+										
+					@if (showParcelado()) {
+						<div style="display: flex; flex-direction: row; gap: 1rem; flex: 1;">
+							<div class="parcelas">
+								<label class="form-label" for="txtParcelas">Parcelas</label>
+								<input type="number" class="form-control" id="txtParcelas1" min="2" max="365" maxlength="3" [value]="numeroParcelas()" (change)="numeroParcelas.set($any($event.target).value)"/>
+							</div>
+
+							<div class="valor">
+								<label class="form-label" for="txtValorParcela">Valor da Parcela</label>
+								<input type="text" class="form-control" id="txtValorParcela1" disabled [value]="valorParcela()"/>        
+							</div>
+						</div>
+					} @else if (showRecorrente()) {
+						<div style="display: flex; flex-direction: row; gap: 1rem; flex: 1;">
+							<div>
+								<label class="form-label" for="cmbRecorrencia">Recorrência</label>
+								<select class="form-select" id="cmbRecorrencia" aria-label="Floating label select example">									
+									<option value="1">Mensal</option>
+									<option value="2">Anual</option>						
+								</select>
+							</div>
+						</div>
+					}
+					
+				</div>
 
 			</div>
-		</form>
-	</div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('Cross click')">Desistir</button>
-		<button type="button" class="btn btn-outline-primary" (click)="modal.close('Save click')">Inlcuir</button>
-	</div>
+			
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('Cross click')">Desistir</button>
+			<button type="button" class="btn btn-outline-primary" (click)="modal.close('Save click')">Inlcuir</button>
+		</div>
+	</form>
 </ng-template>

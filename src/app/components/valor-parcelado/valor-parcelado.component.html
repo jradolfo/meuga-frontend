@@ -1,0 +1,15 @@
+<div class="input-parcelado">
+    <div class="switch">
+        <app-switch-input [(switchState)]="parcelado"></app-switch-input>	
+    </div>
+
+    <div class="parcelas">
+        <label class="form-label" for="txtParcelas">Parcelas</label>
+        <input type="number" class="form-control" id="txtParcelas" [(ngModel)]="numeroParcelas" [disabled]="!parcelado()" min="1" max="12" />
+    </div>
+
+    <div class="valor">
+        <label class="form-label" for="txtValorParcela">Valor da Parcela</label>
+        <input type="text" class="form-control" id="txtValorParcela" [(ngModel)]="valorParcela" readonly/>        
+    </div>
+</div>

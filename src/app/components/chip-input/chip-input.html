@@ -1,7 +1,7 @@
-<div class="form-floating chip-input mb-3" [class.disabled]="disabled" (click)="focusInput()">
-      
-  <label for="floatingInput">Tags</label>
-    
+
+<label class="form-label" for="floatingInput">Tags</label>
+
+<div class="form-select chip-input" [class.disabled]="disabled" (click)="focusInput()" (keydown)="onKeydown($event)">
   @if (chips.length) {
     <div class="chips">
         @for (c of chips; track c; let i = $index) {

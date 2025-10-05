@@ -2,7 +2,7 @@
 
   <div class="prefix">
       <label class="form-label" for="cmbMoeda">Moeda</label>
-      <select id="cmbMoeda" class="form-select" [value]="selectedCurrency" (change)="onCurrencyChange($event)" aria-label="Moeda selecionada">
+      <select id="cmbMoeda" class="form-select" aria-label="Moeda selecionada" [value]="moeda()" (change)="moeda.set($any($event.target).value)">
           <option value="BRL">R$</option>
           <option value="EUR">€</option>
           <option value="USD">$</option>
@@ -16,11 +16,8 @@
         class="form-control"
         type="text"
         inputmode="decimal"
-        [placeholder]="placeholder"
-        [disabled]="disabled"
-        (input)="onInput($event)"
-        (blur)="onBlur()"
-        (focus)="onFocus()"
+        [value]="valorFormatado()"       
+        (input)="onInput($event)"    
         autocomplete="off"
     />
   </div>

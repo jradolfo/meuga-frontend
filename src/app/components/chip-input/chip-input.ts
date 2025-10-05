@@ -1,10 +1,10 @@
 import { Component, ElementRef, forwardRef, HostListener, Input, ViewChild } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
 
 @Component({
-  selector: 'app-chip-input',
-  imports: [],
+  selector: 'app-chip-input',  
   standalone: true,
+  imports: [FormsModule],
   templateUrl: './chip-input.html',
   styleUrl: './chip-input.css',
   providers: [
